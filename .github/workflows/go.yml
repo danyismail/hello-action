@@ -33,9 +33,9 @@ jobs:
 
     needs: build
 
-    steps:
+    steps: |
     - name: copy files to deployment server
-      uses: appleboy/ssh-action-action@master
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
