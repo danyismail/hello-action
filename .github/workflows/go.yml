@@ -21,7 +21,9 @@ jobs:
         go-version: '1.18.1'
 
     - name: Build
-      run: go build -o app
+      run:  go mod init
+            go mod tidy
+            go build -o app.go
   deploy:
     runs-on: ubuntu-latest
 
