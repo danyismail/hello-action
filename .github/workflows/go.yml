@@ -35,7 +35,7 @@ jobs:
 
     steps:
     - name: copy files to deployment server
-      uses: danyismail/hello-action@development
+      uses: appleboy/ssh-action-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
