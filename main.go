@@ -11,6 +11,7 @@ func main() {
 	text := `
         Hello
 		Test
+		Test
     `
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, text)
