@@ -1,50 +1,50 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+# # This workflow will build a golang project
+# # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: golang
+# name: golang
 
-on:
-  push:
-    branches: [ "development" ]
-  pull_request:
-    branches: [ "development" ]
+# on:
+#   push:
+#     branches: [ "development" ]
+#   pull_request:
+#     branches: [ "development" ]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: '1.18.1'
+#     - name: Set up Go
+#       uses: actions/setup-go@v2
+#       with:
+#         go-version: '1.18.1'
 
-    - name: step1
-      run:  go mod init hello-action
+#     - name: step1
+#       run:  go mod init hello-action
 
-    - name: step2
-      run:  go mod tidy
+#     - name: step2
+#       run:  go mod tidy
 
-    - name: step32
-      run:  go build -o app.go        
-  deploy:
-    runs-on: ubuntu-latest
+#     - name: step32
+#       run:  go build -o app.go        
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    needs: build
+#     needs: build
 
-    steps:
-    - name: copy files to deployment server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }} # You should use SSH key instead of password in production
-        port: 22 # Specify your server's SSH port
-        script: 
-          cd /home/eps/go/src/eps-backend
-          git pull origin development
-          rm -rf go.mod go.sum
-          go mod tidy
-          go mod init
-          go run main.go
+#     steps:
+#     - name: copy files to deployment server
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST }}
+#         username: ${{ secrets.USERNAME }}
+#         password: ${{ secrets.PASSWORD }} # You should use SSH key instead of password in production
+#         port: 22 # Specify your server's SSH port
+#         script: 
+#           cd /home/eps/go/src/eps-backend
+#           git pull origin development
+#           rm -rf go.mod go.sum
+#           go mod tidy
+#           go mod init
+#           go run main.go
